@@ -1,11 +1,21 @@
 from fastapi import FastAPI
 import uvicorn
+from api.microservices import router 
+from db.db_setup import engine, Base
+from db.models import  microservice, enviroment, deploy 
+
+Base.metadata.create_all(bind=engine)
+#nviroment.Base.metadata.create_all(bind=engine)
+#deploy.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
 @app.get("/")
 async def root():
     return "The app is running"
+
+app.include_router(router)
+
 
 '''if __name__ == '__main__':
     uvicorn.run(app, host="0.0.0.0")'''
