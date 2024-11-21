@@ -8,6 +8,8 @@ class Environment(Base):
     __tablename__ = 'environment'
     id = Column(Integer, primary_key=True, autoincrement=True)
     nombre = Column(String, nullable=False)
+    
+    #defining Foreign key 
     microservice_id = Column(Integer, ForeignKey('microservice.id'), nullable=False)
 
     # Relation with microservice and deploy tables
