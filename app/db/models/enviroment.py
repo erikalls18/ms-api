@@ -14,4 +14,4 @@ class Environment(Base):
 
     # Relation with microservice and deploy tables
     microservice = relationship('Microservice', back_populates='environment')
-    deploys = relationship('Deploy', back_populates='environment')
+    deploy = relationship('Deploy', back_populates='environment')

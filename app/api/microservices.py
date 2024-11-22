@@ -4,13 +4,14 @@ from api.utils.ms_utils import get_ms_by_id, get_ms_by_name, get_all_ms, create_
 from db.db_setup import get_db
 from fastapi import Depends, HTTPException 
 from sqlalchemy.orm import Session 
-from pydantic_squemas.ms_squema import MicroservicesCreate
+
+from pydantic_squemas.ms_squema import MicroservicesCreate, MicroservicesBase
 
 router = fastapi.APIRouter()
 
-@router.get("/services")
-async def get_list_services(skip: int=0, limit: int =100, db: Session = Depends(get_db)):
-    microservices= get_all_ms(db, skip=skip, limit=limit)
+@router.get("/services", response_model= List[MicroservicesBase])
+async def get_list_services( limit: int =100, db: Session = Depends(get_db)):
+    microservices= get_all_ms(db, limit=limit)
     return microservices
 
 @router.get("/services/{id}")

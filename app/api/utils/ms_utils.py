@@ -9,8 +9,8 @@ def get_ms_by_id(db:Session , ms_id:int):
 def get_ms_by_name(db:Session , ms_name:str):
     return db.query(Microservice).filter(Microservice.name == ms_name).first()
 
-def get_all_ms(db:Session , skip:int =0, limit: int =100):
-    return db.query(Microservice).offset(skip).limit(limit).all()
+def get_all_ms(db:Session ,  limit: int =100):
+    return db.query(Microservice).limit(limit).all()
 
 def create_ms(db:Session, microservice: MicroservicesCreate):
     db_ms= Microservice(name = microservice.name, image= microservice.image, owner= microservice.owner)

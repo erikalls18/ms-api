@@ -13,4 +13,3 @@ class Deploy(Base):
     microservice = relationship('Microservice', back_populates='deploy')
     environment = relationship('Environment', back_populates='deploy')
 
-  
