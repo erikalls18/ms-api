@@ -19,8 +19,8 @@ async def get_services(id: int):
     pass
 
 @router.post("/services")
-async def create_microservice():
-    pass
+async def create_microservice(ms:MicroservicesBase, db: Session = Depends(get_db) ):
+    return create_ms(db=db, microservice=ms)
 
 @router.put("/services/{id}")
 async def update_microservices():

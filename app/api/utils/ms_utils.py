@@ -13,8 +13,12 @@ def get_all_ms(db:Session ,  limit: int =100):
     return db.query(Microservice).limit(limit).all()
 
 def create_ms(db:Session, microservice: MicroservicesCreate):
-    db_ms= Microservice(name = microservice.name, image= microservice.image, owner= microservice.owner)
-    db.add(db_user)
+    db_ms = Microservice(
+        name=microservice.name,
+        image=microservice.image,
+        owner=microservice.owner
+    )
+    db.add(db_ms)
     db.commit()
     db.refresh(db_ms)
     return db_ms 
