@@ -1,9 +1,10 @@
 from pydantic import BaseModel
 from enum import Enum
 from db.models.environment  import EnvironmentType
+from datetime import datetime
 
 class EnvironmentBase(BaseModel):
-    name: EnvironmentType
+    env: EnvironmentType
     microservice_id: int 
 
     class Config:
@@ -17,9 +18,17 @@ class EnvironmentCreate(EnvironmentBase):
 
 class EnvironmentResponse(BaseModel):
     id: int
-    name: EnvironmentType
+    env: EnvironmentType
+    created_at: datetime
+    #microservice_id: int 
+
+    class Config:
+        orm_mode = True
+class EnvironmentResponsewithMicroservice(BaseModel):
+    id: int
+    env: EnvironmentType
+    created_at: datetime
     microservice_id: int 
-   
-    
+
     class Config:
         orm_mode = True

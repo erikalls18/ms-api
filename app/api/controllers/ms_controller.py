@@ -8,7 +8,7 @@ def get_ms_by_id(db:Session , ms_id:int):
     #eturn db.query(Microservice).filter(Microservice.id == ms_id).first()
     return (
         db.query(Microservice)
-        .options(joinedload(Microservice.environments))  # Carga los ambientes relacionados
+        .options(joinedload(Microservice.environment))  
         .filter(Microservice.id == ms_id)
         .first()
     )
@@ -23,7 +23,7 @@ def create_ms(db:Session, microservice: MicroservicesCreate):
     db_ms = Microservice(
         name=microservice.name,
         image=microservice.image,
-        owner=microservice.owner
+        team=microservice.team
     )
     db.add(db_ms)
     db.commit()
@@ -34,7 +34,7 @@ def update_ms(db:Session , ms_id:int, microservice: MicroservicesUpdate):
     db_ms= db.query(Microservice).filter(Microservice.id == ms_id).first()
   
     db_ms.image = microservice.image
-    db_ms.owner = microservice.owner 
+    db_ms.team = microservice.team 
    
     db.commit()
     db.refresh(db_ms)
