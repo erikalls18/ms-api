@@ -1,10 +1,17 @@
-from sqlalchemy.orm import Session 
+from sqlalchemy.orm import Session , joinedload
+from sqlalchemy.orm import joinedload
 
 from db.models.microservice import Microservice
 from pydantic_squemas.ms_squema import MicroservicesCreate, MicroservicesUpdate
 
 def get_ms_by_id(db:Session , ms_id:int):
-    return db.query(Microservice).filter(Microservice.id == ms_id).first()
+    #eturn db.query(Microservice).filter(Microservice.id == ms_id).first()
+    return (
+        db.query(Microservice)
+        .options(joinedload(Microservice.environments))  # Carga los ambientes relacionados
+        .filter(Microservice.id == ms_id)
+        .first()
+    )
 
 def get_ms_by_name(db:Session , ms_name:str):
     return db.query(Microservice).filter(Microservice.name == ms_name).first()

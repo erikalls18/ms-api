@@ -1,4 +1,6 @@
 from pydantic import BaseModel
+from pydantic_squemas.enviroment_squema import EnvironmentResponse
+from typing import List, Optional
 
 class MicroservicesBase(BaseModel):
     name: str
@@ -25,6 +27,7 @@ class MicroservicesResponse(BaseModel):
     name: str
     image: str
     owner: str 
+    environment: Optional[List[EnvironmentResponse]] = None
     
     class Config:
         orm_mode = True

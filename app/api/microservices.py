@@ -1,10 +1,9 @@
 import fastapi
 from typing import Optional, List 
-from api.utils.ms_utils import get_ms_by_id, get_ms_by_name, get_all_ms, create_ms, update_ms, delete_ms
+from api.controllers.ms_controller import get_ms_by_id, get_ms_by_name, get_all_ms, create_ms, update_ms, delete_ms
 from db.db_setup import get_db
 from fastapi import Depends, HTTPException 
 from sqlalchemy.orm import Session 
-
 from pydantic_squemas.ms_squema import MicroservicesCreate, MicroservicesBase, MicroservicesResponse,  MicroservicesUpdate
 
 router = fastapi.APIRouter()
@@ -16,13 +15,14 @@ async def get_list_services( limit: int =100, db: Session = Depends(get_db)):
     return microservices
 
 @router.get("/services/{ms_id}", response_model= MicroservicesResponse)
-async def get_services(  ms_id:int , db: Session = Depends(get_db),):
+async def get_services(  ms_id:int , db: Session = Depends(get_db)):
     
     db_ms= get_ms_by_id(db= db, ms_id= ms_id)
     if db_ms is None: 
         raise HTTPException(status_code= 404, detail = "Microservice not found")
 
     return db_ms
+    
 
 @router.post("/services", response_model = MicroservicesResponse, status_code = 201)
 async def create_microservice(ms:MicroservicesCreate, db: Session = Depends(get_db) ):

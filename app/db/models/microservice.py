@@ -23,5 +23,5 @@ class Microservice(Base):
     image = Column(String(100), nullable=False)
     owner = Column(String(100), index=True, nullable=False)
 
-    environment = relationship('Environment', back_populates='microservice')  # Cambiado previamente
+    environment = relationship('Environment', back_populates='microservice') 
     deploy = relationship('Deploy', back_populates='microservice')  # Relación con Deploy
