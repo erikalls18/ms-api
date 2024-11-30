@@ -21,4 +21,4 @@ class Environment(Base):
 
     # Relationships  with microservice and deploy tables
     microservice = relationship('Microservice', back_populates='environment')
-    deploy = relationship('Deploy', back_populates='environment')
+    deploy = relationship('Deploy', back_populates='environment', cascade="all, delete-orphan")

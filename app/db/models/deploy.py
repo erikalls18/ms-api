@@ -11,9 +11,9 @@ class Deploy(Base):
     command= Column(String(200), nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
-    status= Column(String(100), nullable=False)
-    microservice_id = Column(Integer, ForeignKey('microservice.id'), unique=True, nullable=False)
-    environment_id = Column(Integer, ForeignKey('environment.id'), unique=True, nullable=False)
+    status= Column(String(100), default= 'Creating', nullable=False)
+    microservice_id = Column(Integer, ForeignKey('microservice.id'), nullable=False)
+    environment_id = Column(Integer, ForeignKey('environment.id'),  nullable=False)
 
     # Relación uno a uno con Microservicio y Environment
     microservice = relationship('Microservice', back_populates='deploy')

@@ -13,23 +13,8 @@ def get_environment_by_env(db:Session , env:EnvironmentType):
     return db.query(Environment).filter(Environment.env == env).all()
 
 def get_all_environments(db:Session ):
-    
     results = db.query(Environment).all()
     return results
-    '''results = (
-        db.query(Environment, Microservice.id.label("microservice_id"))
-        .join(Microservice, Environment.microservice_id == Microservice.id)
-        .all()
-    )
-
-    return [
-        {
-            "id": env.id,
-            "env": env.env,
-            "microservice_id": microservice_id,
-        }
-        for env, microservice_id in results
-    ]'''
 
 def get_environment_for_microservice(db: Session, env: EnvironmentType, microservice_id: int):
     return db.query(Environment).filter(

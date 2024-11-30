@@ -13,7 +13,6 @@ router_env= fastapi.APIRouter()
 @router_env.get("/environment", response_model = List[EnvironmentResponsewithMicroservice])
 async def get_list_enviroment(db: Session = Depends(get_db)):
     query_result = get_all_environments(db=db)
-  
     return query_result
 
 @router_env.get("/environment/type/{env}", response_model= List[EnvironmentResponsewithMicroservice])

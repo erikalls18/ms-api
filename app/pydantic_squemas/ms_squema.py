@@ -2,6 +2,7 @@ from pydantic import BaseModel
 from pydantic_squemas.enviroment_squema import EnvironmentResponse
 from typing import List, Optional
 from datetime import datetime
+from pydantic_squemas.deploy_squema import DeployResponse
 
 class MicroservicesBase(BaseModel):
     name: str
@@ -31,6 +32,7 @@ class MicroservicesResponse(BaseModel):
     created_at: datetime
     updated_at: datetime
     environment: Optional[List[EnvironmentResponse]] = None
+    deploy: Optional[List[DeployResponse]] = None
     
     class Config:
         orm_mode = True
