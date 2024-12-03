@@ -22,6 +22,7 @@ class DeployResponse(BaseModel):
     version: str
     command: str 
     status: str
+    created_at: datetime
 
     class Config:
         orm_mode = True
@@ -34,6 +35,7 @@ class DeployResponsewithIDs(BaseModel):
     status: str
     microservice_id: int
     environment_id: int
+    created_at: datetime
 
     class Config:
         orm_mode = True

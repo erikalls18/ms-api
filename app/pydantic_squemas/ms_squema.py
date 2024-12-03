@@ -32,7 +32,7 @@ class MicroservicesResponse(BaseModel):
     created_at: datetime
     updated_at: datetime
     environment: Optional[List[EnvironmentResponse]] = None
-    deploy: Optional[List[DeployResponse]] = None
+    #deploy: Optional[List[DeployResponse]] = None
     
     class Config:
         orm_mode = True

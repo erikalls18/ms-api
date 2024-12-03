@@ -22,7 +22,7 @@ class EnvironmentResponse(BaseModel):
     id: int
     env: EnvironmentType
     created_at: datetime
-    #deploy: Optional[List[DeployResponse]] = None
+    deploy: Optional[List[DeployResponse]] = None
     #microservice_id: int 
 
     class Config:

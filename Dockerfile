@@ -12,6 +12,7 @@ RUN pip install passlib[bcrypt]
 RUN pip install -U pytest
 RUN pip install requests
 RUN pip install sqlalchemy
+RUN pip install pyyaml
 #COPY requirements.txt .
 #RUN pip install -r requirements.txt
 

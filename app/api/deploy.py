@@ -14,7 +14,7 @@ router_dp = fastapi.APIRouter()
 async def get_all_deploys(db: Session = Depends(get_db)):
     return get_deploys(db=db)
 
-@router_dp.get("/deploy/{deploy_id}", response_model= DeployResponse)
+@router_dp.get("/deploy/{deploy_id}", response_model= DeployResponsewithIDs)
 async def get_deploy(deploy_id: int, db: Session = Depends(get_db) ):
     db_deploy= get_deploy_by_id(db=db, deploy_id=deploy_id)
     if not db_deploy: 
