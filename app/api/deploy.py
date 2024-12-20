@@ -7,6 +7,7 @@ from pydantic import BaseModel
 from pydantic_squemas.deploy_squema import DeployCreate, DeployResponse, DeployResponsewithIDs
 from api.controllers.deploy_controller import get_deploys, create_new_deploy, get_deploy_by_id, delete_deploy
 from typing import List 
+from services.kube import create_deploy_k8s
 
 router_dp = fastapi.APIRouter()
 
@@ -24,6 +25,11 @@ async def get_deploy(deploy_id: int, db: Session = Depends(get_db) ):
 @router_dp.post("/deploy", response_model = DeployResponse)
 async def create_deploy(deploy: DeployCreate, db: Session = Depends(get_db)):
     db_deploy= create_new_deploy(db=db, deploy=deploy)
+    '''microservice_data = get_data_microservices(db, db_deploy.microservice_id)
+    if microservice_data:
+        print(f"Microservice Name: {microservice_data.name}")  '''
+    
+    create_deploy_k8s(db_deploy)
     return db_deploy
 
 @router_dp.delete("/deploy/{deploy_id}")

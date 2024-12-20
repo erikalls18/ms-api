@@ -13,6 +13,7 @@ RUN pip install -U pytest
 RUN pip install requests
 RUN pip install sqlalchemy
 RUN pip install pyyaml
+RUN pip install kubernetes
 #COPY requirements.txt .
 #RUN pip install -r requirements.txt
 

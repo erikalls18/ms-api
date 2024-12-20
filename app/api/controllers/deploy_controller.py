@@ -1,6 +1,9 @@
 from sqlalchemy.orm import Session 
 from pydantic_squemas.deploy_squema import DeployCreate
 from db.models.deploy import Deploy
+from db.models.microservice import Microservice 
+from db.models.environment import Environment
+from sqlalchemy.orm import joinedload
 
 
 def get_deploys(db:Session):
@@ -20,6 +23,7 @@ def create_new_deploy(db: Session, deploy: DeployCreate):
     db.add(db_deploy)
     db.commit()
     db.refresh(db_deploy)
+    
     return db_deploy
 
 def delete_deploy(db: Session, deploy_id: int):
@@ -27,4 +31,3 @@ def delete_deploy(db: Session, deploy_id: int):
     db.delete(db_deploy)
     db.commit()
     return {"detail": "Deploy deleted successfully"}
-

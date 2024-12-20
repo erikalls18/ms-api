@@ -9,6 +9,7 @@ services:
       - "8000:8000"
     volumes:
       - ./app:/usr/src/app
+      - ~/.kube:/home/lle57/.kube      
     depends_on:
       - db
         #condition: service_healthy
@@ -22,6 +23,7 @@ services:
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: microservices
       PYTHONPATH: /usr/src/app
+      KUBECONFIG: /home/lle57/.kube/config
     entrypoint: ["/bin/bash", "-c", "/usr/src/app/wait_for_it.sh test_db"]
    
   db:
