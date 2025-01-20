@@ -4,6 +4,12 @@ Key Features
 
     User Authentication: Secure login system with JWT token-based authorization.
     Microservice Deployment: Simplified and efficient access to deploy and manage microservices.
+Tech Stack
+
+    Backend: Python - FastAPI
+    Containerization: Docker
+    Database: PostgreSQL 
+    Orchestration: Kubernetes
 
 Setup and Usage
 Prerequisites
