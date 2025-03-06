@@ -5,17 +5,19 @@ from db.db_setup import get_db
 from fastapi import Depends, HTTPException 
 from sqlalchemy.orm import Session 
 from pydantic_squemas.ms_squema import MicroservicesCreate, MicroservicesBase, MicroservicesResponse,  MicroservicesUpdate
+from services.auth import verify_token
+
 
 router = fastapi.APIRouter()
 
 #parameter + model that the endpoint need to use 
 @router.get("/services", response_model= List[MicroservicesResponse])
-async def get_list_services( limit: int =100, db: Session = Depends(get_db)):
+async def get_list_services( limit: int =100, db: Session = Depends(get_db), payload: dict = Depends(verify_token)):
     microservices= get_all_ms(db, limit=limit)
     return microservices
 
 @router.get("/services/{ms_id}", response_model= MicroservicesResponse)
-async def get_services(  ms_id:int , db: Session = Depends(get_db)):
+async def get_services(  ms_id:int , db: Session = Depends(get_db),payload: dict = Depends(verify_token) ):
     
     db_ms= get_ms_by_id(db= db, ms_id= ms_id)
     if db_ms is None: 
@@ -25,13 +27,13 @@ async def get_services(  ms_id:int , db: Session = Depends(get_db)):
     
 
 @router.post("/services", response_model = MicroservicesResponse, status_code = 201)
-async def create_microservice(ms:MicroservicesCreate, db: Session = Depends(get_db) ):
+async def create_microservice(ms:MicroservicesCreate, db: Session = Depends(get_db), payload: dict = Depends(verify_token)):
     db_ms = get_ms_by_name(db=db, ms_name = ms.name)
     if db_ms:
         raise HTTPException(status_code= 400, detail= "Microservice already exists")
     return create_ms(db=db, microservice=ms)
 
-@router.patch("/services/{ms_id}", response_model = MicroservicesResponse)
+@router.put("/services/{ms_id}", response_model = MicroservicesResponse)
 async def update_microservice(ms_id: int, microservice: MicroservicesUpdate, db: Session = Depends(get_db)):
     
     db_ms= get_ms_by_id(db= db, ms_id= ms_id)
@@ -42,7 +44,7 @@ async def update_microservice(ms_id: int, microservice: MicroservicesUpdate, db:
     return update_ms(db=db, ms_id= ms_id, microservice=microservice)
 
 @router.delete("/services/{ms_id}")
-async def delete_microservices(ms_id: int, db: Session = Depends(get_db)):
+async def delete_microservices(ms_id: int, db: Session = Depends(get_db), payload: dict = Depends(verify_token)):
     
     db_ms= get_ms_by_id(db= db, ms_id= ms_id)
 
