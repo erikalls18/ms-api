@@ -16,10 +16,12 @@ Prerequisites
 
 Ensure you have the following installed on your machine:
 
-    Docker
-    Docker Compose
+    Python
+    Docker 
+    Kubernetes
 
 Building the Application
+docker-compose build
 
-To build the Docker containers, run: docker-compose build
-To start the application, use: docker-compose up
+Start the aplication
+docker-compose up
