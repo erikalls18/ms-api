@@ -14,6 +14,8 @@ RUN pip install requests
 RUN pip install sqlalchemy
 RUN pip install pyyaml
 RUN pip install kubernetes
+RUN pip install python-dotenv
+
 #COPY requirements.txt .
 #RUN pip install -r requirements.txt
 
@@ -26,6 +28,6 @@ COPY app/ /usr/src/app/
 
 RUN pip list
 
-EXPOSE 8000
+EXPOSE 8004
 
 CMD ["uvicorn", "main:app", "--reload", "--host", "0.0.0.0" ]
