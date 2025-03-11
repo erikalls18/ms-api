@@ -5,7 +5,6 @@ from db.models.microservice import Microservice
 from pydantic_squemas.ms_squema import MicroservicesCreate, MicroservicesUpdate
 
 def get_ms_by_id(db:Session , ms_id:int):
-    #eturn db.query(Microservice).filter(Microservice.id == ms_id).first()
     return (
         db.query(Microservice)
         .options(joinedload(Microservice.environment))  

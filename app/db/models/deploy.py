@@ -15,7 +15,7 @@ class Deploy(Base):
     microservice_id = Column(Integer, ForeignKey('microservice.id'), nullable=False)
     environment_id = Column(Integer, ForeignKey('environment.id'),  nullable=False)
 
-    # Relación uno a uno con Microservicio y Environment
+    # Define the relationship one to one with Microservice and  Environment
     microservice = relationship('Microservice', back_populates='deploy')
     environment = relationship('Environment', back_populates='deploy')
 

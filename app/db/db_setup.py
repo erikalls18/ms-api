@@ -8,7 +8,7 @@ engine = create_engine(
     DATABASE_URL, connect_args={}, future = True
     )
 
-# Create una sesión
+# Create  sesion
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine, future = True )
 
 Base = declarative_base()

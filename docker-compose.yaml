@@ -12,9 +12,8 @@ services:
       - ~/.kube:/home/lle57/.kube      
     depends_on:
       - db
-        #condition: service_healthy
-        
-        #restart: true
+      #condition: service_healthy
+      #restart: true
     env_file:
       - .env
       

@@ -26,10 +26,6 @@ async def get_deploy(deploy_id: int, db: Session = Depends(get_db), payload: dic
 @router_dp.post("/deploy", response_model = DeployResponse)
 async def create_deploy(deploy: DeployCreate, db: Session = Depends(get_db), payload: dict = Depends(verify_token)):
     db_deploy= create_new_deploy(db=db, deploy=deploy)
-    '''microservice_data = get_data_microservices(db, db_deploy.microservice_id)
-    if microservice_data:
-        print(f"Microservice Name: {microservice_data.name}")  '''
-    
     create_deploy_k8s(db_deploy)
     return db_deploy
 
