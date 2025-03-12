@@ -1,9 +1,13 @@
-## Microservices Deployment Platform
-This project is a platform designed to streamline the deployment and management of microservices in Kubernetes. The application enables users to authenticate securely and, upon authentication, grants access to various microservices using a JWT token, ensuring efficient and seamless deployment workflows.
-Key Features
+## Microservices Deployment Platform  
 
-    User Authentication: Secure login system with JWT token-based authorization.
-    Microservice Deployment: Simplified and efficient access to deploy and manage microservices.
+This project is a platform designed to streamline the deployment and management of microservices in Kubernetes. The application enables users to authenticate securely and, upon authentication, grants access to create microservices, environments, and deployments.  
+
+### Key Features  
+
+The application operates with two independent APIs:  
+
+- **deploy_auth**: A containerized API with a PostgreSQL database that securely manages user authentication using a JWT token-based authorization system.  
+- **ms_api**: Handles CRUD operations on a PostgreSQL database and automates the creation of deployments in Kubernetes, simplifying the deployment process.  
 #
 # Tech Stack
 
@@ -44,23 +48,28 @@ Key Features
 | **DELETE** | `/environment/{env_id}`      | `env_id: int`        | Delete an environment by its ID.                   |
 
 
-### Usage Examples
-
-#### Get all deploys
-`
-
 
 ## Setup and Usage
-## Prerequisites
 
-Ensure you have the following installed on your machine:
+### Prerequisites  
 
-    Python
-    Docker 
-    Kubernetes
+Before running the application, ensure you have the following installed:  
 
-Building the Application
+- **Docker** (required to run the containers)  
+- **Docker Compose** (to manage multi-container applications)  
+- **Kubernetes** 
+
+### Building the Application  
+
+## Building the Application  
+
+1. Clone, build, and run the **deployAuth** application: https://github.com/erikalls18/deployAuth.git.  
+2. Clone, build and run the **ms_api** application.  
+
+To build and start the application, run the following commands:  
+
+```sh
 docker-compose build
-
-Start the aplication
 docker-compose up
+
+
