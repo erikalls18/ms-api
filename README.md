@@ -1,4 +1,4 @@
-# # Microservices Deployment Platform
+## Microservices Deployment Platform
 This project is a platform designed to streamline the deployment and management of microservices in Kubernetes. The application enables users to authenticate securely and, upon authentication, grants access to various microservices using a JWT token, ensuring efficient and seamless deployment workflows.
 Key Features
 
@@ -12,14 +12,28 @@ Key Features
 - **Database**: PostgreSQL  
 - **Orchestration**: Kubernetes
 
+## Microservices Endpoints
+
+| **Method**  | **Endpoint**            | **Parameters**      | **Description**                                  |
+|------------|------------------------|--------------------|--------------------------------------------------|
+| **GET**    | `/services`             | `limit: int = 100` | Retrieve a list of microservices.               |
+| **GET**    | `/services/{ms_id}`     | `ms_id: int`       | Retrieve a specific microservice by its ID.     |
+| **POST**   | `/services`             | **JSON in body with microservice** | Create a new microservice. |
+| **PUT**    | `/services/{ms_id}`     | `ms_id: int`, **JSON in body with microservice** | Update an existing microservice. |
+| **DELETE** | `/services/{ms_id}`     | `ms_id: int`       | Delete a microservice by its ID.                |
+
+
 ## Deploy Endpoints
 
-| Method  | Endpoint           | Description                                | Parameters          | Response |
-|---------|--------------------|--------------------------------------------|---------------------|-----------|
-| GET     | `/deploy`          | Retrieves all deploys                      | Token in headers    | List of deploys |
-| GET     | `/deploy/{id}`     | Retrieves a specific deploy by ID          | `deploy_id` in URL, Token in headers | Deploy data |
-| POST    | `/deploy`          | Creates a new deploy                       | JSON in body with deploy data, Token in headers | Created deploy |
-| DELETE  | `/deploy/{id}`     | Deletes a specific deploy                  | `deploy_id` in URL, Token in headers | Deletion confirmation |
+| **Method**  | **Endpoint**              | **Parameters**          | **Description**                                  |
+|------------|--------------------------|------------------------|--------------------------------------------------|
+| **GET**    | `/deploy`                 | N/A                    | Retrieve all deployments.                        |
+| **GET**    | `/deploy/{deploy_id}`     | `deploy_id: int`       | Retrieve a specific deployment by its ID.       |
+| **POST**   | `/deploy`                 | **JSON in body with deploy** | Create a new deployment.        |
+| **DELETE** | `/deploy/{deploy_id}`     | `deploy_id: int`       | Delete a deployment by its ID.                  |
+
+---
+
 
 ### Usage Examples
 
