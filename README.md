@@ -27,16 +27,6 @@ The application operates with two independent APIs:
 | **DELETE** | `/services/{ms_id}`     | `ms_id: int`       | Delete a microservice by its ID.                |
 
 
-## Deploy Endpoints
-
-| **Method**  | **Endpoint**              | **Parameters**          | **Description**                                  |
-|------------|--------------------------|------------------------|--------------------------------------------------|
-| **GET**    | `/deploy`                 | N/A                    | Retrieve all deployments.                        |
-| **GET**    | `/deploy/{deploy_id}`     | `deploy_id: int`       | Retrieve a specific deployment by its ID.       |
-| **POST**   | `/deploy`                 | JSON in body with deploy | Create a new deployment.        |
-| **DELETE** | `/deploy/{deploy_id}`     | `deploy_id: int`       | Delete a deployment by its ID.                  |
-
----
 ## Environment Endpoints
 
 | **Method**  | **Endpoint**                  | **Parameters**        | **Description**                                      |
@@ -47,7 +37,16 @@ The application operates with two independent APIs:
 | **POST**   | `/environment`               | JSON in body with environment | Create a new environment.         |
 | **DELETE** | `/environment/{env_id}`      | `env_id: int`        | Delete an environment by its ID.                   |
 
+## Deploy Endpoints
 
+| **Method**  | **Endpoint**              | **Parameters**          | **Description**                                  |
+|------------|--------------------------|------------------------|--------------------------------------------------|
+| **GET**    | `/deploy`                 | N/A                    | Retrieve all deployments.                        |
+| **GET**    | `/deploy/{deploy_id}`     | `deploy_id: int`       | Retrieve a specific deployment by its ID.       |
+| **POST**   | `/deploy`                 | JSON in body with deploy | Create a new deployment.        |
+| **DELETE** | `/deploy/{deploy_id}`     | `deploy_id: int`       | Delete a deployment by its ID.                  |
+
+---
 
 ## Setup and Usage
 
@@ -57,9 +56,9 @@ Before running the application, ensure you have the following installed:
 
 - **Docker** (required to run the containers)  
 - **Docker Compose** (to manage multi-container applications)  
-- **Kubernetes** 
+- **Kubernetes** (a working kubeconfig in the ~/.kube directory)
 
-### Building the Application  
+- Create a .env file to store secrets and algorithm configurations.
 
 ## Building the Application  
 
