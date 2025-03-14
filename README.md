@@ -43,8 +43,8 @@ The application operates with two independent APIs:
 |------------|--------------------------|------------------------|--------------------------------------------------|
 | **GET**    | `/deploy`                 | N/A                    | Retrieve all deployments.                        |
 | **GET**    | `/deploy/{deploy_id}`     | `deploy_id: int`       | Retrieve a specific deployment by its ID.       |
-| **POST**   | `/deploy`                 | JSON in body with deploy | Create a new deployment.        |
-| **DELETE** | `/deploy/{deploy_id}`     | `deploy_id: int`       | Delete a deployment by its ID.                  |
+| **POST**   | `/deploy`                 | JSON in body with deploy | Create a new deployment in DB and K8S        |
+| **DELETE** | `/deploy/{deploy_id}`     | `deploy_id: int`       | Delete a deployment by its ID in the DB and K8S.                  |
 
 ---
 
