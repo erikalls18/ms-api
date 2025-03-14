@@ -10,19 +10,19 @@ class MicroservicesBase(BaseModel):
     team: str 
 
     class Config:
-        orm_mode = True
+        from_atrributes = True
 
 class MicroservicesCreate(MicroservicesBase):
 
     ...
     class Config:
-        orm_mode = True
+        from_atrributes = True
 class MicroservicesUpdate(BaseModel):
     image: str
     team: str 
     
     class Config:
-        orm_mode = True
+        from_atrributes = True
 
 class MicroservicesResponse(BaseModel):
     id: int
@@ -34,5 +34,5 @@ class MicroservicesResponse(BaseModel):
     environment: Optional[List[EnvironmentResponse]] = None
     
     class Config:
-        orm_mode = True
+        from_attributes = True
 

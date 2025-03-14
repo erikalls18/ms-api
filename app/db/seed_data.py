@@ -8,7 +8,7 @@ from sqlalchemy import text
 from db.db_setup import engine, Base
 
 
-def drop_tables_if_exist(db: Session):
+def truncate_tables(db: Session):
     try:
         db.execute(text("TRUNCATE TABLE deploy, microservice, environment RESTART IDENTITY CASCADE"))
         db.commit()
@@ -51,5 +51,5 @@ def insert_data(db):
 if __name__ == "__main__":
     Base.metadata.create_all(bind=engine)
     db: Session = SessionLocal()
-    drop_tables_if_exist(db)
+    truncate_tables(db)
     insert_data(db)

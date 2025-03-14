@@ -7,7 +7,7 @@ from pydantic import BaseModel
 from pydantic_squemas.deploy_squema import DeployCreate, DeployResponse, DeployResponsewithIDs
 from api.controllers.deploy_controller import get_deploys, create_new_deploy, get_deploy_by_id, delete_deploy
 from typing import List 
-from services.kube import create_deploy_k8s
+from services.kube import create_deploy_k8s, delete_deploy_in_K8s
 from services.auth import verify_token
 
 router_dp = fastapi.APIRouter()
@@ -34,5 +34,10 @@ async def delete_deploys(deploy_id: int, db: Session = Depends(get_db), payload:
     db_deploy = get_deploy_by_id(db= db, deploy_id = deploy_id)
     if db_deploy is None: 
         raise HTTPException(status_code= 404, detail = "Deploy not found")
+    else:
+        try: 
+            delete_deploy_in_K8s(db_deploy)
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=f"Error deleting deploy in Kubernetes: {str(e)}")
     return delete_deploy(db=db, deploy_id= deploy_id)
     

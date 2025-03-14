@@ -26,6 +26,7 @@ def create_namespace(namespace_api, name):
     except Exception as e:
         print(f"Error creating namespace: {e} {name}")
 
+
 def create_manifest(image, name, version, command):
     manifest = {
         "apiVersion": "apps/v1",
@@ -85,8 +86,7 @@ def create_deploy_k8s (deploy: Deploy ):
     img = deploy.microservice.image
     version=  deploy.version
     command= deploy.command.split()
-
-    #Create API to interact with Kubernetes
+  
     client = dynamic.DynamicClient(
         api_client.ApiClient(configuration=config.load_kube_config())
     )
@@ -96,14 +96,42 @@ def create_deploy_k8s (deploy: Deploy ):
     if check_namespace_exists(namespace_api, new_namespace):
         manifest = create_manifest(img, new_deploy, version, command)
     else: 
+        manifest = create_manifest(img,  new_deploy, version, command)
         create_namespace(namespace_api, new_namespace)
-        manifest = create_manifest(img, new_deploy, version, command)
+       
      
 
     if check_deploy_exists(deployment_api, new_namespace, new_deploy):
         deployment_api.replace(body=manifest, namespace=new_namespace, name=new_deploy)
     else: 
         deployment_api.create(body = manifest, namespace = new_namespace)
+
+def delete_deploy_in_K8s(deploy: Deploy):
+    deploy_id = deploy.id
+    name = deploy.microservice.name.lower()
+    environment=  deploy.environment.env
+    new_namespace = f"{name}-{environment}"
+    new_deploy = f"{new_namespace}"
+    
+
+    client = dynamic.DynamicClient(
+        api_client.ApiClient(configuration=config.load_kube_config())
+    )
+    namespace_api = client.resources.get(api_version="v1", kind="Namespace")
+    deployment_api = client.resources.get(api_version="apps/v1", kind="Deployment")
+
+    try: 
+        deployments= deployment_api.get(name=new_deploy, namespace=new_namespace)
+        if deployments:
+            deployment_api.delete(name=deployments.metadata.name, namespace=new_namespace)
+            print(f"Deployment with deploy_id {deploy_id} deleted successfully2.")
+        else:
+            print(f"No Deployment found with deploy_id {deploy_id}.")
+    except Exception as e:
+        print(f"Error deleting deployment: {e}")
+
+
+       
 
 
 

@@ -10,12 +10,12 @@ class DeployBase(BaseModel):
     environment_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes  = True
 
 class DeployCreate(DeployBase):
     ...
     class Config:
-        orm_mode = True
+        from_attributes  = True
 
 class DeployResponse(BaseModel):
     id: int 
@@ -25,7 +25,7 @@ class DeployResponse(BaseModel):
     created_at: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes  = True
 
 
 class DeployResponsewithIDs(BaseModel):
@@ -38,4 +38,4 @@ class DeployResponsewithIDs(BaseModel):
     created_at: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True

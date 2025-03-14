@@ -10,13 +10,13 @@ class EnvironmentBase(BaseModel):
     microservice_id: int 
 
     class Config:
-        orm_mode = True
+        from_attributes  = True
 
 class EnvironmentCreate(EnvironmentBase):
 
     ...
     class Config:
-        orm_mode = True
+        from_attributes  = True
 
 class EnvironmentResponse(BaseModel):
     id: int
@@ -26,7 +26,8 @@ class EnvironmentResponse(BaseModel):
   
 
     class Config:
-        orm_mode = True
+        from_attributes = True
+
 class EnvironmentResponsewithMicroservice(BaseModel):
     id: int
     env: EnvironmentType
@@ -34,4 +35,4 @@ class EnvironmentResponsewithMicroservice(BaseModel):
     microservice_id: int 
 
     class Config:
-        orm_mode = True
+        from_attributes = True
